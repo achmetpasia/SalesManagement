@@ -1,0 +1,17 @@
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\Persistence.csproj.AssemblyReference.cache
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\Persistence.AssemblyInfoInputs.cache
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\Persistence.AssemblyInfo.cs
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\Persistence.csproj.CoreCompileInputs.cache
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\bin\Debug\net6.0\Persistence.deps.json
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\bin\Debug\net6.0\Persistence.dll
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\bin\Debug\net6.0\Persistence.pdb
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\bin\Debug\net6.0\Application.dll
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\bin\Debug\net6.0\Domain.dll
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\bin\Debug\net6.0\Application.pdb
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\bin\Debug\net6.0\Domain.pdb
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\Persistence.csproj.CopyComplete
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\Persistence.dll
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\refint\Persistence.dll
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\Persistence.pdb
+C:\Users\Achmet\Desktop\code\SalesManagement\src\Persistence\obj\Debug\net6.0\ref\Persistence.dll

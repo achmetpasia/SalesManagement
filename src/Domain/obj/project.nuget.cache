@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "NIuvw72Iuafkv7sVyBFkiQTaWK4lUnjJBomEB0C3xXzZ/leTaf+AR66BYK5ShYjhBLudopSQ+waz0Oh6/lOR9A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Achmet\\Desktop\\code\\SalesManagement\\src\\Domain\\Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Achmet\\.nuget\\packages\\dawn.guard\\1.12.0\\dawn.guard.1.12.0.nupkg.sha512"
+  ],
+  "logs": []
+}
