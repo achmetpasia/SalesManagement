@@ -68,7 +68,6 @@ public class OrderCommandService : IOrderCommandService
             decimal itemPrice = product.Price * itemRequest.Quantity;
 
             totalPrice += itemPrice;
-
             
             var item = new Item(itemRequest.Quantity, product.Id, id, itemPrice);
 

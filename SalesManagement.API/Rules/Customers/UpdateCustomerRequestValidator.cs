@@ -1,27 +1,46 @@
 ﻿using FluentValidation;
 using SalesManagement.API.Models.Customers;
 
-namespace SalesManagement.API.Rules.Customers
+namespace SalesManagement.API.Rules.Customers;
+
+/// <summary>
+/// Validator for UpdateCustomerRequest class information.
+/// </summary>
+public class UpdateCustomerRequestValidator : AbstractValidator<UpdateCustomerRequest>
 {
-    public class UpdateCustomerRequestValidator : AbstractValidator<UpdateCustomerRequest>
+    public UpdateCustomerRequestValidator()
     {
-        public UpdateCustomerRequestValidator()
-        {
-            RuleFor(c => c.FirstName)
+        /// <summary>
+        /// Validates the first name property.
+        /// </summary>
+        RuleFor(c => c.FirstName)
             .NotEmpty()
-            .NotNull();
+            .NotNull()
+            .MaximumLength(50);
 
-            RuleFor(c => c.LastName)
-                .NotEmpty()
-                .NotNull();
+        /// <summary>
+        /// Validates the last name property.
+        /// </summary>
+        RuleFor(c => c.LastName)
+            .NotEmpty()
+            .NotNull()
+            .MaximumLength(50);
 
-            RuleFor(c => c.Address)
-                .NotEmpty()
-                .NotNull();
+        /// <summary>
+        /// Validates the address property.
+        /// </summary>
+        RuleFor(c => c.Address)
+            .NotEmpty()
+            .NotNull()
+            .MaximumLength(255); 
 
-            RuleFor(c => c.PostalCode)
-                .NotEmpty()
-                .NotNull();
-        }
+        /// <summary>
+        /// Validates the postal code property.
+        /// </summary>
+        RuleFor(c => c.PostalCode)
+            .NotEmpty()
+            .NotNull()
+            .Matches(@"^\d{5}(-\d{4})?$") 
+            .WithMessage("Invalid postal code format");
     }
 }

@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SalesManagement.API</name>
+    </assembly>
+    <members>
+        <member name="T:SalesManagement.API.Controllers.BaseController">
+            <summary>
+            Base controller providing access to the Mediator instance for handling commands and queries.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Controllers.BaseController.Mediator">
+            <summary>
+            Gets the Mediator instance for handling commands and queries.
+            </summary>
+        </member>
+        <member name="T:SalesManagement.API.Controllers.CustomerController">
+            <summary>
+            Controller for managing customer operations.
+            </summary>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.CustomerController.Create(Application.Features.Customers.Commands.Create.CreateCustomerCommand)">
+            <summary>
+            Creates a new customer.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST /api/customers
+                {
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "address": "123 Main St",
+                    "postalCode": "12345"
+                }
+            </remarks>
+            <param name="command">The command to create a new customer.</param>
+            <returns>
+            An <see cref="T:Application.Utilities.Common.ResponseBases.Concrate.ObjectBaseResponse`1"/> containing information about the result of the operation.
+            </returns>
+            <response code="201">Returns the newly created customer.</response>
+            <response code="400">If the request is invalid or the command is null.</response>
+            <response code="500">If an error occurred while processing the request.</response>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.CustomerController.Update(System.Guid,SalesManagement.API.Models.Customers.UpdateCustomerRequest)">
+            <summary>
+            Updates an existing customer.
+            </summary>
+            <param name="id">The unique identifier of the customer to update.</param>
+            <param name="request">The request payload containing updated customer information.</param>
+            <remarks>
+            Sample request:
+            
+                PUT /api/customers/{id}
+                {
+                    "firstName": "UpdatedFirstName",
+                    "lastName": "UpdatedLastName",
+                    "address": "UpdatedAddress",
+                    "postalCode": "UpdatedPostalCode"
+                }
+            </remarks>
+            <returns>
+            An <see cref="T:Application.Utilities.Common.ResponseBases.Concrate.ObjectBaseResponse`1"/> containing information about the result of the operation.
+            </returns>
+            <response code="200">Returns the updated customer.</response>
+            <response code="400">If the request is invalid or the customer with the given ID is not found.</response>
+            <response code="500">If an error occurred while processing the request.</response>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.CustomerController.Delete(System.Guid)">
+            <summary>
+            Deletes a customer.
+            </summary>
+            <param name="id">The unique identifier of the customer to delete.</param>
+            <returns>
+            No content if the deletion is successful.
+            </returns>
+            <response code="204">Returns no content if the deletion is successful.</response>
+            <response code="404">If the customer with the given ID is not found.</response>
+            <response code="500">If an error occurred while processing the request.</response>
+        </member>
+        <member name="T:SalesManagement.API.Controllers.OrderController">
+            <summary>
+            Controller for managing order operations.
+            </summary>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.OrderController.Create(SalesManagement.API.Models.Orders.CreateOrderRequest)">
+            <summary>
+            Creates a new order.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST /api/orders
+                {
+                    "customerId": "5a9ae210-0000-0000-0000-3a7d5ab8f38b",
+                    "items": [
+                        {
+                            "productId": "5a9ae210-0000-0000-0000-3a7d5ab8f38c",
+                            "quantity": 2
+                        }
+                    ]
+                }
+            </remarks>
+            <param name="request">The request payload for creating a new order.</param>
+            <returns>
+            An <see cref="T:Application.Utilities.Common.ResponseBases.Concrate.ObjectBaseResponse`1"/> containing information about the result of the operation.
+            </returns>
+            <response code="201">Returns the newly created order.</response>
+            <response code="400">If the request is invalid or the command is null.</response>
+            <response code="500">If an error occurred while processing the request.</response>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.OrderController.Update(SalesManagement.API.Models.Orders.UpdateOrderRequest)">
+            <summary>
+            Updates an existing order item.
+            </summary>
+            <param name="request">The request payload containing the item Id and quantity to update.</param>
+            <remarks>
+            Sample request:
+            
+                PUT /api/orders
+                {
+                    "Id": "e3d57674-c5be-4d6a-a34a-f237c21ae7f5",
+                    "Quantity": 10
+                }
+            
+            The `Id` in the request payload refers to the item Id.
+            </remarks>
+            <returns>
+            An <see cref="T:Application.Utilities.Common.ResponseBases.Concrate.ObjectBaseResponse`1"/> containing information about the result of the operation.
+            </returns>
+            <response code="200">Returns the updated order.</response>
+            <response code="400">If the request is invalid or the order with the given ID is not found.</response>
+            <response code="500">If an error occurred while processing the request.</response>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.OrderController.Delete(System.Guid)">
+            <summary>
+            Deletes an order.
+            </summary>
+            <param name="id">The unique identifier of the order to delete.</param>
+            <returns>
+            No content if the deletion is successful.
+            </returns>
+            <response code="204">Returns no content if the deletion is successful.</response>
+            <response code="404">If the order with the given ID is not found.</response>
+            <response code="500">If an error occurred while processing the request.</response>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.OrderController.GetAll(Application.Features.Orders.Queries.Get.GetOrderQuery)">
+            <summary>
+            Gets a list of orders based on the provided query parameters.
+            </summary>
+            <remarks>
+            Use this endpoint to retrieve a list of orders based on the provided query parameters.
+            If <paramref name="request.CustomerId.CustomerId"/> is specified, the endpoint will return orders only for the given customer.
+            If <paramref name="request.CustomerId.CustomerId"/> is not provided, the endpoint will return orders for all customers.
+            </remarks>
+            <param name="request">The query parameters for retrieving orders.</param>
+            <returns>
+            An <see cref="T:Application.Utilities.Common.ResponseBases.Concrate.ArrayBaseResponse`1"/> containing a list of orders and the total count of matching orders.
+            </returns>
+        </member>
+        <member name="T:SalesManagement.API.Controllers.ProductController">
+            <summary>
+            Controller for managing product operations.
+            </summary>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.ProductController.Create(Application.Features.Products.Commands.Create.CreateProductCommand)">
+            <summary>
+            Creates a new product.
+            </summary>
+            <param name="command">The command to create a product.</param>
+            <remarks>
+            Sample request:
+            
+            POST /api/Product
+            {
+                "Name": "Sample Product",
+                "Price": 19.99
+            }
+            </remarks>
+            <returns>Returns the result of the product creation operation.</returns>
+            <response code="200">Returns the result of the product creation operation.</response>
+            <response code="400">If the request is invalid or the product creation fails.</response>
+            <response code="500">If an error occurred while processing the request.</response>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.ProductController.Update(System.Guid,SalesManagement.API.Models.Products.UpdateProductRequest)">
+            <summary>
+            Updates an existing product.
+            </summary>
+            <param name="id">The unique identifier of the product to update.</param>
+            <param name="request">The request containing updated product information.</param>
+            <remarks>
+            Sample request:
+            
+            PUT /api/Product/{id}
+            {
+                "Name": "Updated Product Name",
+                "Price": 29.99
+            }
+            </remarks>
+            <returns>Returns the updated product information.</returns>
+            <response code="200">Returns the updated product information.</response>
+            <response code="400">If the request is invalid or the product update fails.</response>
+            <response code="500">If an error occurred while processing the request.</response>
+        </member>
+        <member name="M:SalesManagement.API.Controllers.ProductController.Delete(System.Guid)">
+            <summary>
+            Deletes a product.
+            </summary>
+            <param name="id">The unique identifier of the product to delete.</param>
+            <response code="204">Returns NoContent if the product is successfully deleted.</response>
+            <response code="400">If the request is invalid or the product deletion fails.</response>
+            <response code="500">If an error occurred while processing the request.</response>
+        </member>
+        <member name="T:SalesManagement.API.Models.Customers.UpdateCustomerRequest">
+            <summary>
+            Represents a request to update customer information.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Customers.UpdateCustomerRequest.FirstName">
+            <summary>
+            Gets or sets the first name of the customer.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Customers.UpdateCustomerRequest.LastName">
+            <summary>
+            Gets or sets the last name of the customer.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Customers.UpdateCustomerRequest.Address">
+            <summary>
+            Gets or sets the address of the customer.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Customers.UpdateCustomerRequest.PostalCode">
+            <summary>
+            Gets or sets the postal code of the customer.
+            </summary>
+        </member>
+        <member name="T:SalesManagement.API.Models.Orders.CreateOrderRequest">
+            <summary>
+            Represents a request to create a new order.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Orders.CreateOrderRequest.CustomerId">
+            <summary>
+            Gets or sets the unique identifier of the customer placing the order.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Orders.CreateOrderRequest.Items">
+            <summary>
+            Gets or sets the list of items included in the order.
+            </summary>
+        </member>
+        <member name="T:SalesManagement.API.Models.Orders.UpdateOrderRequest">
+            <summary>
+            Represents a request to update an existing order item quantity.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Orders.UpdateOrderRequest.Id">
+            <summary>
+            Gets or sets the unique identifier of the item to update.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Orders.UpdateOrderRequest.Quantity">
+            <summary>
+            Gets or sets the updated quantity of the order item.
+            </summary>
+        </member>
+        <member name="T:SalesManagement.API.Models.Products.UpdateProductRequest">
+            <summary>
+            Represents a request to update an existing product.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Products.UpdateProductRequest.Name">
+            <summary>
+            Gets or sets the updated name of the product.
+            </summary>
+        </member>
+        <member name="P:SalesManagement.API.Models.Products.UpdateProductRequest.Price">
+            <summary>
+            Gets or sets the updated price of the product.
+            </summary>
+        </member>
+        <member name="T:SalesManagement.API.Rules.Customers.UpdateCustomerRequestValidator">
+            <summary>
+            Validator for UpdateCustomerRequest class information.
+            </summary>
+        </member>
+        <member name="T:SalesManagement.API.Rules.Orders.CreateOrderRequestValidator">
+            <summary>
+            Validator for CreateOrderRequest Class information.
+            </summary>
+        </member>
+        <member name="T:SalesManagement.API.Rules.Orders.UpdateOrderRequestValidator">
+            <summary>
+            Validator for UpdateOrderRequest class.
+            </summary>
+        </member>
+        <member name="T:SalesManagement.API.Rules.Products.UpdateProductRequestValidator">
+            <summary>
+            Validator for  UpdateProductRequest class.
+            </summary>
+        </member>
+    </members>
+</doc>

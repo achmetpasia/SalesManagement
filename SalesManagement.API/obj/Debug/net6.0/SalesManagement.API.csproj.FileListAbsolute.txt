@@ -71,3 +71,4 @@ C:\Users\Achmet\Desktop\code\SalesManagement\SalesManagement.API\bin\Debug\net6.
 C:\Users\Achmet\Desktop\code\SalesManagement\SalesManagement.API\bin\Debug\net6.0\Humanizer.dll
 C:\Users\Achmet\Desktop\code\SalesManagement\SalesManagement.API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Achmet\Desktop\code\SalesManagement\SalesManagement.API\obj\Debug\net6.0\SalesManagement.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Achmet\Desktop\code\SalesManagement\SalesManagement.API\bin\Debug\net6.0\SalesManagement.API.xml
