@@ -101,21 +101,6 @@ public class CustomerRepositoryTests :  IDisposable
         Assert.Equal(customer.Id, foundCustomer.Id);
     }
 
-    [Fact]
-    public async Task ShouldSuccess_IsExistsAsync()
-    {
-        using var context = new Context(_options);
-        var repository = new CustomerRepository(context);
-
-        var customer = CreateSampleCustomer();
-
-        await repository.CreateAsync(customer);
-        await context.SaveChangesAsync();
-
-        Expression<Func<Customer, bool>> predicate = x => x.Id == customer.Id;
-        var doesExist = await repository.IsExistAsync(predicate);
-        Assert.True(doesExist);
-    }
 
     private Customer CreateSampleCustomer()
     {

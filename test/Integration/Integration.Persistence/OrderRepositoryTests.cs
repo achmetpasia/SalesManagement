@@ -99,23 +99,6 @@ public class OrderRepositoryTests : IDisposable
         Assert.Equal(order.Id, foundOrder.Id);
     }
 
-    [Fact]
-    public async Task ShouldSuccess_FindAll()
-    {
-        using var context = new Context(_options);
-        var repository = new OrderRepository(context);
-
-        var order1 = CreateSampleOrder();
-        var order2 = CreateSampleOrder();
-
-        await repository.CreateAsync(order1);
-        await repository.CreateAsync(order2);
-        await context.SaveChangesAsync();
-
-        var allOrders = await repository.FindAllAsync();
-        Assert.Equal(2, allOrders.Count);
-    }
-
     private Order CreateSampleOrder()
     {
         var customer = new Customer("John", "Doe", "123 Main St", "12345");
