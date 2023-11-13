@@ -1,23 +1,57 @@
-﻿using Application.Features.Orders.Services;
-using Application.Utilities.Common.ResponseBases.Concrate;
+﻿using Application.Utilities.Common.ResponseBases.Concrate;
+using Domain.Entites.Orders;
 using MediatR;
 
 namespace Application.Features.Orders.Queries.Get
 {
     public class GetOrderHandler : IRequestHandler<GetOrderQuery, ArrayBaseResponse<OrderResponseDto>>
     {
-        private readonly IOrderQueryService _orderQueryService;
+        private readonly IOrderRepository _orderRepository;
 
-        public GetOrderHandler(IOrderQueryService orderQueryService)
+        public GetOrderHandler(IOrderRepository orderRepository)
         {
-            _orderQueryService = orderQueryService;
+            _orderRepository = orderRepository;
         }
 
         public async Task<ArrayBaseResponse<OrderResponseDto>> Handle(GetOrderQuery request, CancellationToken cancellationToken)
         {
-            var (query, totalCount) = await _orderQueryService.GetAll(request);
+            var list = new List<Order>();
 
-            return new ArrayBaseResponse<OrderResponseDto>(query, totalCount, request.PageLenght, request.PageIndex);
+            if (request.CustomerId != Guid.Empty)
+            {
+                list = await _orderRepository.FindAllByConditionAsync(x => x.CustomerId == request.CustomerId);
+            }
+            else
+            {
+                list = await _orderRepository.FindAllAsync();
+            }
+
+            if (request.StartDate.HasValue)
+            {
+                list = list.Where(x => x.CreatedDate >= request.StartDate).ToList();
+            }
+            if (request.EndDate.HasValue)
+            {
+                list = list.Where(x => x.CreatedDate <= request.EndDate).ToList();
+            }
+
+
+            var totalCount = list.Count();
+
+            list = list.OrderByDescending(x => x.CreatedDate).ToList();
+
+            OrderResponseDto data = new OrderResponseDto();
+
+            var response = new List<OrderResponseDto>
+            {
+                new OrderResponseDto
+                {
+                    Orders = list
+                }
+
+            };
+
+            return new ArrayBaseResponse<OrderResponseDto>(response, totalCount, request.PageLenght, request.PageIndex);
         }
     }
 }

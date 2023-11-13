@@ -9,6 +9,7 @@ using Domain.Entites.Products;
 using FakeItEasy;
 using Persistence.Services.ProductServices;
 using System.Linq.Expressions;
+using Domain.Entites.Core;
 
 namespace Test.Persistence.Products;
 

@@ -1,7 +1,6 @@
 ﻿using Dawn;
 using Domain.Entites.Core;
 using Domain.Entites.Orders;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entites.Products;
 public class Product : Entity

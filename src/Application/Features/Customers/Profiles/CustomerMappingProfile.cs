@@ -1,5 +1,4 @@
 ﻿using Application.Features.Customers.Commands.Create;
-using Application.Features.Customers.Commands.Dtos;
 using Application.Features.Customers.Commands.Update;
 using Application.Utilities.Common.ResponseBases.Concrate;
 using AutoMapper;
@@ -13,13 +12,20 @@ public class CustomerMappingProfile : Profile
     {
         CreateMap<Customer, CreateCustomerCommand>().ReverseMap();
         CreateMap<Customer, CreateCustomerResponse>().ReverseMap();
-        CreateMap<CustomerDto, CreateCustomerResponse>().ReverseMap();
+        CreateMap<Customer, ObjectBaseResponse<CreateCustomerResponse>>()
+            .ConstructUsing(src => new ObjectBaseResponse<CreateCustomerResponse>
+            {
+            Data = new CreateCustomerResponse { Id = src.Id },
+            StatusCode = System.Net.HttpStatusCode.Created
+            });
 
         CreateMap<Customer, UpdateCustomerCommand>().ReverseMap();
         CreateMap<Customer, UpdateCustomerResponse>().ReverseMap();
-        CreateMap<CustomerDto, UpdateCustomerResponse>().ReverseMap();
-
-        CreateMap<ObjectBaseResponse<CustomerDto>, ObjectBaseResponse<CreateCustomerResponse>>().ReverseMap();
-        CreateMap<ObjectBaseResponse<CustomerDto>, ObjectBaseResponse<UpdateCustomerResponse>>().ReverseMap();
+        CreateMap<Customer, ObjectBaseResponse<UpdateCustomerResponse>>()
+            .ConstructUsing(src => new ObjectBaseResponse<UpdateCustomerResponse>
+            {
+                Data = new UpdateCustomerResponse { Id = src.Id },
+                StatusCode = System.Net.HttpStatusCode.OK
+            });
     }
 }

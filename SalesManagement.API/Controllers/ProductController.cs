@@ -2,6 +2,7 @@
 using Application.Features.Products.Commands.Delete;
 using Application.Features.Products.Commands.Update;
 using Application.Utilities.Common.ResponseBases.Concrate;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SalesManagement.API.Models.Products;
 
@@ -14,6 +15,10 @@ namespace SalesManagement.API.Controllers
     [ApiController]
     public class ProductController : BaseController
     {
+        public ProductController(IMediator mediator) : base(mediator)
+        {
+        }
+
         /// <summary>
         /// Creates a new product.
         /// </summary>
@@ -68,7 +73,7 @@ namespace SalesManagement.API.Controllers
                 request.Name,
                 request.Price));
 
-            return StatusCode((int)result.StatusCode, request);
+            return StatusCode((int)result.StatusCode, result);
         }
 
         /// <summary>

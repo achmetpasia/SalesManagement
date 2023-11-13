@@ -24,6 +24,8 @@ public class UpdateCustomerValidator : AbstractValidator<UpdateCustomerCommand>
 
         RuleFor(c => c.PostalCode)
             .NotEmpty()
-            .NotNull();
+            .NotNull()
+            .Matches(@"^\d{5}(-\d{4})?$")
+            .WithMessage("Invalid postal code format");
     }
 }

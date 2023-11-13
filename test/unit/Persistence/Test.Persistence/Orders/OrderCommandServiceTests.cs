@@ -2,18 +2,17 @@
 using Application.Abstarctions.Repositories.ItemRepositories;
 using Application.Abstarctions.Repositories.OrderRepositories;
 using Application.Abstarctions.Repositories.ProductRepositories;
-using Application.Abstarctions;
 using Application.Features.Orders.Commands.Create;
 using Application.Features.Orders.Commands.Delete;
 using Application.Features.Orders.Commands.Update;
 using Application.Features.Orders.Dtos;
 using Application.Utilities.Common.ResponseBases.Concrate;
+using Domain.Entites.Core;
 using Domain.Entites.Customers;
 using Domain.Entites.Orders;
 using Domain.Entites.Products;
 using FakeItEasy;
 using Persistence.Services.OrderService;
-using System.Linq.Expressions;
 
 namespace Test.Persistence.Orders;
 

@@ -2,6 +2,7 @@
 using Application.Features.Customers.Commands.Delete;
 using Application.Features.Customers.Commands.Update;
 using Application.Utilities.Common.ResponseBases.Concrate;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SalesManagement.API.Models.Customers;
 
@@ -14,6 +15,9 @@ namespace SalesManagement.API.Controllers
     [ApiController]
     public class CustomerController : BaseController
     {
+        public CustomerController(IMediator mediator) : base(mediator)
+        {
+        }
         /// <summary>
         /// Creates a new customer.
         /// </summary>
@@ -40,8 +44,8 @@ namespace SalesManagement.API.Controllers
         public async Task<IActionResult> Create([FromBody] CreateCustomerCommand command)
         {
             var result = await Mediator.Send(command);
-
-            return StatusCode((int) result.StatusCode, result);
+            
+            return StatusCode((int)result.StatusCode, result);
         }
 
         /// <summary>
@@ -78,7 +82,7 @@ namespace SalesManagement.API.Controllers
                 request.Address,
                 request.PostalCode));
 
-            return StatusCode((int)result.StatusCode, request);
+            return StatusCode((int)result.StatusCode, result);
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using Application.Features.Orders.Commands.Delete;
 using Application.Features.Orders.Commands.Update;
 using Application.Features.Orders.Queries.Get;
 using Application.Utilities.Common.ResponseBases.Concrate;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SalesManagement.API.Models.Orders;
 
@@ -15,6 +16,10 @@ namespace SalesManagement.API.Controllers;
 [ApiController]
 public class OrderController : BaseController
 {
+    public OrderController(IMediator mediator) : base(mediator)
+    {
+    }
+
     /// <summary>
     /// Creates a new order.
     /// </summary>
@@ -82,7 +87,7 @@ public class OrderController : BaseController
             request.Id,
             request.Quantity));
 
-        return StatusCode((int)result.StatusCode, request);
+        return StatusCode((int)result.StatusCode, result);
     }
 
     /// <summary>

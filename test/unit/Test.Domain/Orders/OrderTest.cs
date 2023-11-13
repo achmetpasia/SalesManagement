@@ -66,10 +66,10 @@ public class OrderTest
         DateTime orderDate = DateTime.Now;
         var order = new Order(orderDate, 0, Guid.NewGuid(), new List<Item>());
         var items = new List<Item>
-    {
+        {
         new Item(2, Guid.NewGuid(), Guid.NewGuid(), 20.0m),
         new Item(3, Guid.NewGuid(), Guid.NewGuid(), 30.0m)
-    };
+        };
 
         order.AddListItems(items);
 

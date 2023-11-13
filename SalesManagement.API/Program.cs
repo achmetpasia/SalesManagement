@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using Infrastructure.Filters;
 using FluentValidation.AspNetCore;
 using Application.Features.Customers.Commands.Rules;
+using SalesManagement.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -54,6 +55,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web.API v1"));
 }
+
+app.UseExceptionHandler(s => s.Run(ExceptionHandler.Handle));
 
 app.UseHttpsRedirection();
 

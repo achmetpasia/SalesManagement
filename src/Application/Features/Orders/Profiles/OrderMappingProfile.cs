@@ -1,6 +1,5 @@
 ﻿using Application.Features.Orders.Commands.Create;
 using Application.Features.Orders.Commands.Update;
-using Application.Features.Orders.Dtos;
 using Application.Utilities.Common.ResponseBases.Concrate;
 using AutoMapper;
 using Domain.Entites.Orders;
@@ -13,13 +12,20 @@ public class OrderMappingProfile : Profile
     {
         CreateMap<Order, CreateOrderCommand>().ReverseMap();
         CreateMap<Order, CreateOrderResponse>().ReverseMap();
-        CreateMap<OrderDto, CreateOrderResponse>().ReverseMap();
+        CreateMap<Order, ObjectBaseResponse<CreateOrderResponse>>()
+            .ConstructUsing(src => new ObjectBaseResponse<CreateOrderResponse>
+            {
+                Data = new CreateOrderResponse { Id = src.Id },
+                StatusCode = System.Net.HttpStatusCode.Created
+            });
 
         CreateMap<Order, UpdateOrderCommand>().ReverseMap();
         CreateMap<Order, UpdateOrderResponse>().ReverseMap();
-        CreateMap<OrderDto, UpdateOrderResponse>().ReverseMap();
-
-        CreateMap<ObjectBaseResponse<OrderDto>, ObjectBaseResponse<CreateOrderResponse>>().ReverseMap();
-        CreateMap<ObjectBaseResponse<OrderDto>, ObjectBaseResponse<UpdateOrderResponse>>().ReverseMap();
+        CreateMap<Order, ObjectBaseResponse<UpdateOrderResponse>>()
+            .ConstructUsing(src => new ObjectBaseResponse<UpdateOrderResponse>
+            {
+                Data = new UpdateOrderResponse { Id = src.Id },
+                StatusCode = System.Net.HttpStatusCode.OK
+            });
     }
 }

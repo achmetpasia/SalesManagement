@@ -1,22 +1,30 @@
-﻿using Application.Features.Customers.Services;
+﻿using Application.Exceptions;
 using Application.Utilities.Common.ResponseBases.ComplexTypes;
+using Domain.Entites.Core;
+using Domain.Entites.Customers;
 using MediatR;
 
 namespace Application.Features.Customers.Commands.Delete;
 
 public class DeleteCustomerHandler : IRequestHandler<DeleteCustomerCommand, ResponseBase>
 {
-    private readonly ICustomerCommandService _customerCommandService;
+    private readonly ICustomerRepository _customerRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteCustomerHandler(ICustomerCommandService customerCommandService)
+    public DeleteCustomerHandler(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
     {
-        _customerCommandService = customerCommandService;
+        _customerRepository = customerRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<ResponseBase> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
     {
-        var success = await _customerCommandService.DeleteAsync(request);
+        var entity = await _customerRepository.FindByIdAsync(request.Id);
+        if (entity == null) throw new NotFoundException("This Customer is not exist.");
+        
+        _customerRepository.Delete(entity);
+        await _unitOfWork.SaveChangesAsync();
 
-        return success;
+        return new ResponseBase() { StatusCode = System.Net.HttpStatusCode.NoContent, Message = "Delete Successfully"};
     }
 }
